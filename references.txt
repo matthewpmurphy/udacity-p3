@@ -1,0 +1,6 @@
+1.  lesson 13: Case Study (Udacity)
+2.  https://docs.mongodb.com/
+3.  https://github.com/libiseller/Wrangle-OpenStreetMap-Data/blob/master/code/1_audit.py
+4.  https://github.com/lyvinhhung/Udacity-Data-Analyst-Nanodegree/tree/master/p3%20-%20Wrangle%20OpenStreetMap%20Data
+5.  https://stackoverflow.com/questions/tagged/openstreetmap
+6.  https://docs.google.com/document/d/1F0Vs14oNEs2idFJR3C_OPxwS6L0HPliOii-QpbmrMo4/pub

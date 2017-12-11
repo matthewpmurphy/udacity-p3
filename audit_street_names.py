@@ -5,6 +5,23 @@ from collections import defaultdict
 street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
 expected = ["Avenue", "Boulevard", "Commons", "Court", "Drive", "Lane", "Parkway",
                          "Place", "Road", "Square", "Street", "Trail"]
+mapping = {'Ave'  : 'Avenue',
+           'Blvd' : 'Boulevard',
+           'Dr'   : 'Drive',
+           'Ln'   : 'Lane',
+           'Pkwy' : 'Parkway',
+           'Rd'   : 'Road',
+           'Rd.'   : 'Road',
+           'St'   : 'Street',
+           'street' :"Street",
+           'Ct'   : "Court",
+           'Cir'  : "Circle",
+           'Cr'   : "Court",
+           'ave'  : 'Avenue',
+           'Hwg'  : 'Highway',
+           'Hwy'  : 'Highway',
+           'Sq'   : "Square"}
+
 def audit_street_type(street_types, street_name):
     m = street_type_re.search(street_name)
     if m:
@@ -35,3 +52,14 @@ def update_street_name(name, mapping, regex):
             name = re.sub(regex, mapping[street_type], name)
 
     return name
+
+def audit_streets(osmfile):
+    #take inventory of street names
+    streets = audit(osmfile)
+    #loops through and show the ones that were updated
+    street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
+    for street_type, ways in streets.iteritems():
+        for name in ways:
+            updated_name = update_street_name(name, mapping, street_type_re)
+            if updated_name != name :
+                print name, "=>", updated_name

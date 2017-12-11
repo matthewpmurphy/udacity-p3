@@ -1,3 +1,7 @@
+import re
+import xml.etree.cElementTree as cET
+from collections import defaultdict
+
 def audit_zipcode(invalid_zipcodes, zipcode):
     twoDigits = zipcode[0:2]
 
@@ -10,7 +14,7 @@ def audit_zipcode(invalid_zipcodes, zipcode):
 def is_zipcode(elem):
     return (elem.attrib['k'] == "addr:postcode")
 
-def audit_zip(osmfile):
+def audit(osmfile):
     osm_file = open(osmfile, "r")
     invalid_zipcodes = defaultdict(set)
     for event, elem in cET.iterparse(osm_file, events=("start",)):
@@ -35,11 +39,11 @@ def update_zips(zipcode):
             else:
                 return (re.findall(r'\d+', zipcode))[0]
 
+def audit_zips(osmFile):
+    zipcodes = audit(osmFile)
 
-zipcodes = audit_zip(osmFile)
-
-for street_type, ways in zipcodes.iteritems():
-    for zipcode in ways:
-        updated_zipcode = update_zips(zipcode)
-        if zipcode != updated_zipcode :
-            print zipcode, "=>", updated_zipcode
+    for street_type, ways in zipcodes.iteritems():
+        for zipcode in ways:
+            updated_zipcode = update_zips(zipcode)
+            if zipcode != updated_zipcode :
+                print zipcode, "=>", updated_zipcode

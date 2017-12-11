@@ -5,7 +5,8 @@ import pprint
 from tags import count_tags
 from users import get_users
 from problem_chars import search_keys
-from clean_street_names import audit, update_street_name
+from audit_street_names import audit_streets
+from audit_zipcodes import audit_zips
 from convert_to_json import convert_file
 from connect_to_db import connectToMongo
 from import_file import importFile
@@ -33,57 +34,36 @@ print len(users)
 #search for valid values and potential problems
 keys = search_keys(osmFile)
 pprint.pprint(keys)
-mapping = {'Ave'  : 'Avenue',
-           'Blvd' : 'Boulevard',
-           'Dr'   : 'Drive',
-           'Ln'   : 'Lane',
-           'Pkwy' : 'Parkway',
-           'Rd'   : 'Road',
-           'Rd.'   : 'Road',
-           'St'   : 'Street',
-           'street' :"Street",
-           'Ct'   : "Court",
-           'Cir'  : "Circle",
-           'Cr'   : "Court",
-           'ave'  : 'Avenue',
-           'Hwg'  : 'Highway',
-           'Hwy'  : 'Highway',
-           'Sq'   : "Square"}
-#take inventory of street names
-streets = audit(osmFile)
-#loops through and show the ones that were updated
-street_type_re = re.compile(r'\b\S+\.?$', re.IGNORECASE)
-for street_type, ways in streets.iteritems():
-    for name in ways:
-        updated_name = update_street_name(name, mapping, street_type_re)
-        if updated_name != name :
-            print name, "=>", updated_name
+#audit street names
+audit_streets(osmFile)
+#audit zip codes
+audit_zips(osmFile)
 #Create a json file for import into mongo
-convert_file(osmFile)
-#connect to mongo db
-db = connectToMongo()
-#Import our file into mongodb
-db_name = 'udacity_p3'
-collection = 'data'
-json_file = osmFile + '.json'
-importFile(db, db_name, json_file, collection)
-#load db collection into  object for reuse
-new_orleans_la_data = db[collection]
-#Get size of the OSM file and the JSON file
-getFileSizes(osmFile)
-#Number of documents
-new_orleans_la_data.find().count()
-#Number of unique users
-len(new_orleans_la_data.distinct('created.user'))
-#Number of nodes and ways
-get_ways_and_nodes(new_orleans_la_data)
-#get the top contributers
-get_contribs(new_orleans_la_data)
-#get the top religion
-get_religion(new_orleans_la_data)
-#get the top cuisines
-get_cuisine(new_orleans_la_data)
-#get the top fast food types
-get_fast_food(new_orleans_la_data)
-#get the top gas stations
-get_gas_stations(new_orleans_la_data)
+# convert_file(osmFile)
+# #connect to mongo db
+# db = connectToMongo()
+# #Import our file into mongodb
+# db_name = 'udacity_p3'
+# collection = 'data'
+# json_file = osmFile + '.json'
+# importFile(db, db_name, json_file, collection)
+# #load db collection into  object for reuse
+# new_orleans_la_data = db[collection]
+# #Get size of the OSM file and the JSON file
+# getFileSizes(osmFile)
+# #Number of documents
+# new_orleans_la_data.find().count()
+# #Number of unique users
+# len(new_orleans_la_data.distinct('created.user'))
+# #Number of nodes and ways
+# get_ways_and_nodes(new_orleans_la_data)
+# #get the top contributers
+# get_contribs(new_orleans_la_data)
+# #get the top religion
+# get_religion(new_orleans_la_data)
+# #get the top cuisines
+# get_cuisine(new_orleans_la_data)
+# #get the top fast food types
+# get_fast_food(new_orleans_la_data)
+# #get the top gas stations
+# get_gas_stations(new_orleans_la_data)

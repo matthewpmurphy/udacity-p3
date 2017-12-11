@@ -6,7 +6,7 @@ Wrangle OpenStreetMap Data
 My chosen map area is New Orleans, LA, USA.  It has always been one of my favorite cities.
 
 ## Sample File
-![Sample File](/sample.osm)
+![Sample File](/map/sample.osm)
 
 ## Python code
 - main.py - will execute all of my python scripts in order

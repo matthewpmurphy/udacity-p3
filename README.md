@@ -24,5 +24,5 @@ My chosen map area is New Orleans, LA, USA.  It has always been one of my favori
 - top_fast_food.py - get a list of the most common types of fast food
 - top_gas_stations.py - get a list of the most common gas stations
 
-## Refrences
+## References
 ![References](/references.txt)

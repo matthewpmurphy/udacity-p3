@@ -21,6 +21,8 @@ from top_gas_stations import get_gas_stations
 
 #Load OSM file and path, in this case we are looking at New Orleans, LA, USA
 filename = "new-orleans_louisiana.osm"
+#sample file
+#filename = "sample.osm"
 path = "./map"
 osmFile = os.path.join(path, filename)
 
@@ -39,31 +41,31 @@ audit_streets(osmFile)
 #audit zip codes
 audit_zips(osmFile)
 #Create a json file for import into mongo
-# convert_file(osmFile)
-# #connect to mongo db
-# db = connectToMongo()
-# #Import our file into mongodb
-# db_name = 'udacity_p3'
-# collection = 'data'
-# json_file = osmFile + '.json'
-# importFile(db, db_name, json_file, collection)
-# #load db collection into  object for reuse
-# new_orleans_la_data = db[collection]
-# #Get size of the OSM file and the JSON file
-# getFileSizes(osmFile)
-# #Number of documents
-# new_orleans_la_data.find().count()
-# #Number of unique users
-# len(new_orleans_la_data.distinct('created.user'))
-# #Number of nodes and ways
-# get_ways_and_nodes(new_orleans_la_data)
-# #get the top contributers
-# get_contribs(new_orleans_la_data)
-# #get the top religion
-# get_religion(new_orleans_la_data)
-# #get the top cuisines
-# get_cuisine(new_orleans_la_data)
-# #get the top fast food types
-# get_fast_food(new_orleans_la_data)
-# #get the top gas stations
-# get_gas_stations(new_orleans_la_data)
+convert_file(osmFile)
+#connect to mongo db
+db = connectToMongo()
+#Import our file into mongodb
+db_name = 'udacity_p3'
+collection = 'data'
+json_file = osmFile + '.json'
+importFile(db, db_name, json_file, collection)
+#load db collection into  object for reuse
+new_orleans_la_data = db[collection]
+#Get size of the OSM file and the JSON file
+getFileSizes(osmFile)
+#Number of documents
+new_orleans_la_data.find().count()
+#Number of unique users
+len(new_orleans_la_data.distinct('created.user'))
+#Number of nodes and ways
+get_ways_and_nodes(new_orleans_la_data)
+#get the top contributers
+get_contribs(new_orleans_la_data)
+#get the top religion
+get_religion(new_orleans_la_data)
+#get the top cuisines
+get_cuisine(new_orleans_la_data)
+#get the top fast food types
+get_fast_food(new_orleans_la_data)
+#get the top gas stations
+get_gas_stations(new_orleans_la_data)

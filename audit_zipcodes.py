@@ -38,6 +38,8 @@ def update_zips(zipcode):
                 return (re.findall(r'\d+', zipcode))[0] + "-" +(re.findall(r'\d+', zipcode))[1]
             else:
                 return (re.findall(r'\d+', zipcode))[0]
+    return zipcode
+
 
 def audit_zips(osmFile):
     zipcodes = audit(osmFile)

@@ -1,6 +1,8 @@
 import xml.etree.cElementTree as cET
 import json
 import codecs
+from audit_street_names import update_street_name, mapping, street_type_re
+from audit_zipcodes import update_zips
 
 #Convert the file to json and save
 CREATED = [ "version", "changeset", "timestamp", "user", "uid" ]
@@ -23,10 +25,24 @@ def shape_element(element) :
             if a in element.attrib:
                 node["created"][a]=element.attrib[a]
 
+        temp_address = {}
+        
         if element.findall("./tag")!=[]:
             node["feature"]={}
             for tag in element.iter("tag"):
-                node["feature"][tag.attrib["k"]]=tag.attrib["v"]
+                if tag.attrib["k"] == "addr:street":
+                    street = update_street_name(tag.attrib["v"], mapping, street_type_re)
+                    if street:
+                        temp_address["street"] = street
+                elif tag.attrib["k"] == "addr:postcode":
+                    zipcode = update_zips(tag.attrib["v"])
+                    if zipcode:
+                        temp_address["postcode"] = zipcode
+                else:
+                    node["feature"][tag.attrib["k"]]=tag.attrib["v"]
+
+            if temp_address:
+                node["address"] = temp_address
     return  node
 
 def convert_file(file_in):

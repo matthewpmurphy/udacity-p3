@@ -1,6 +1,11 @@
 # udacity-p3
 Wrangle OpenStreetMap Data
 
+## Report
+![Python Notebook HTML](/Wrangle+OpenStreetMap+Data.html)
+![Improvements](/Improvements.pdf)
+![Anticipated Issues](/Anticipated_Issues.pdf)
+
 ## Data File
 ![New Orleans OSM](/map_file_link.txt)
 My chosen map area is New Orleans, LA, USA.  It has always been one of my favorite cities.

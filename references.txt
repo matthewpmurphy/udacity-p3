@@ -4,3 +4,6 @@
 4.  https://github.com/lyvinhhung/Udacity-Data-Analyst-Nanodegree/tree/master/p3%20-%20Wrangle%20OpenStreetMap%20Data
 5.  https://stackoverflow.com/questions/tagged/openstreetmap
 6.  https://docs.google.com/document/d/1F0Vs14oNEs2idFJR3C_OPxwS6L0HPliOii-QpbmrMo4/pub
+7.  https://facebook.github.io/react-native/
+8.  https://facebook.github.io/react-native/docs/geolocation.html
+9.  https://enterprise.google.com/maps/products/mapsapi.html https://elearningindustry.com/notable-benefits-using-badge-based-elearning-reward-system http://www.wowhead.com/achievement-guides
